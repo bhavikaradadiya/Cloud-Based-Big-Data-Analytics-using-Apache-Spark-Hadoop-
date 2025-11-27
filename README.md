@@ -20,8 +20,6 @@ This repository contains:
 
 ---
 
----
-
 ## 🚀 Technologies Used
 
 - Google Cloud Platform  
@@ -70,9 +68,14 @@ Upload it to **Google Cloud Storage (GCS)** and access it from there.
 
 ### 2️⃣ Upload Dataset to Cloud Storage
 
-```bash
 gsutil cp dataset.json gs://your-bucket/raw/
 
+### 3️⃣ Copy Data to HDFS
+
+hdfs dfs -mkdir /data
+hdfs dfs -copyFromLocal dataset.json /data/
+
+### 🗂 Hadoop MapReduce Job
 
 
 
