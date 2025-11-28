@@ -64,7 +64,6 @@ Upload it to **Google Cloud Storage (GCS)** and access it from there.
 - Configure master and worker nodes  
 - Choose appropriate machine types
 
----
 
 ### 2️⃣ Upload Dataset to Cloud Storage
 
@@ -75,11 +74,83 @@ gsutil cp dataset.json gs://your-bucket/raw/
 hdfs dfs -mkdir /data
 hdfs dfs -copyFromLocal dataset.json /data/
 
-### 🗂 Hadoop MapReduce Job
+---
+
+## 🗂 Hadoop MapReduce Job
+
+Example run:
+
+hadoop jar wordcount.jar /data/dataset.json /output/wordcount 
+
+Code available in:
+
+src/mapreduce/
 
 
+---
+## 🔥 Spark Analysis Job
 
+Submit PySpark job:
 
+gcloud dataproc jobs submit pyspark src/spark/spark_analysis.py --cluster=yourcluster
 
+Outputs stored in HDFS.
 
+---
 
+## 🤖 Machine Learning – Logistic Regression (Spark MLlib)
+
+Used for binary sentiment classification
+
+Accuracy: 87%
+
+Metrics used: Precision, Recall, F1-Score
+
+Balanced on 80/20 train-test split
+
+Notebook:
+
+notebooks/model_training.ipynb
+
+---
+
+## 📊 Visualizations
+
+Place generated images in:
+
+images/
+
+Examples:
+
+Positive vs negative sentiment distribution
+
+Rating trends
+
+Verified vs non-verified purchase comparison
+
+---
+
+## 📌 Key Insights
+
+Negative reviews help identify product weaknesses
+
+Sentiment data improves product recommendation systems
+
+Helps in inventory and supply chain optimization
+
+Detects unusual/fake reviews
+
+Real-time insights enhance customer satisfaction
+
+---
+
+## 👩‍💻 Author
+
+Bhavikaben Radadiya
+MSc Data Analytics – 2025
+GitHub:https://github.com/bhavikaradadiya
+
+## 📜 License
+
+This project is licensed under the MIT License.
+See the LICENSE file for details.
