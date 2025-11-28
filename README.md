@@ -91,11 +91,131 @@ gsutil cp amazon_reviews_2023.json gs://mybucket15560/
 ### **5️⃣ Create the Dataproc Cluster**
 Using UI or gcloud command:
 
-```bash
+
 gcloud dataproc clusters create mycluster \
     --region=europe-west4 \
     --zone=europe-west4-a \
     --master-machine-type=n1-standard-4 \
     --worker-machine-type=n1-standard-2 \
     --num-workers=2
+
 ---
+
+## 📥 HDFS Data Upload
+
+SSH into Master Node:
+
+hdfs dfs -mkdir /amazon_data
+hdfs dfs -copyFromLocal amazon_reviews_2023.json /amazon_data
+hdfs dfs -ls /amazon_data
+
+---
+
+## 🗂 Hadoop MapReduce Job
+
+File Used: wordcount.py
+
+Run MapReduce:  
+python wordcount.py amazon_reviews_2023.json > wordcount_output.txt
+
+**OR using Hadoop:**
+
+hdfs dfs -cat /user/hadoop/wordcount_output.txt | head
+
+**Purpose:**
+
+Remove anomalies
+
+Word frequency extraction
+
+Base text preprocessing
+
+---
+## 🔥 Apache Spark Job (PySpark)
+
+File Used: spark_analysis.py
+
+Run via Dataproc:
+
+gcloud dataproc jobs submit pyspark spark_analysis.py --cluster=mycluster
+
+**Outputs:**
+
+Verified purchase filtering
+
+Average ratings
+
+Top-rated products
+
+Exploratory analytics
+
+---
+## 🤖 Machine Learning (Spark MLlib)
+
+ML Script: logistic_regression.py
+
+Model: Logistic Regression
+
+Accuracy Achieved: 87%
+
+Metrics Used: Accuracy, Precision, Recall, F1-Score
+
+**Steps performed:**
+
+Tokenization
+
+Stopword removal
+
+TF-IDF feature extraction
+
+Train-test split (80/20)
+
+Binary sentiment prediction
+
+Model evaluation
+
+---
+## 📊 Visualizations & Insights
+
+**Generated visualizations include:**
+
+Positive vs Negative review distribution
+
+Rating distributions
+
+Category-wise sentiment trends
+
+
+**Place plots in:**
+
+images/
+
+---
+## 📌 Key Business Insights
+
+Negative reviews highlight product defects
+
+Useful for improving recommendation systems
+
+Helps inventory management
+
+Detects fake/unusual reviews
+
+Real-time sentiment shifts support marketing decisions
+
+---
+
+## 👩‍💻 Author
+
+Bhavikaben Bavchandbhai Radadiya
+
+MSc Data Analytics — 2025
+
+GitHub Repository:
+(https://github.com/bhavikaradadiya/Cloud-Based-Big-Data-Analytics-using-Apache-Spark-Hadoop)
+
+---
+## 📜 License
+
+This project uses the MIT License (see LICENSE file)
+
