@@ -188,7 +188,7 @@ Category-wise sentiment trends
 
 **Place plots in:**
 
-images/
+Result/
 
 ---
 ## 📌 Key Business Insights
