@@ -1,0 +1,8 @@
+pyspark
+numpy
+pandas
+scikit-learn
+nltk
+matplotlib
+google-cloud-storage
+google-cloud-dataproc
