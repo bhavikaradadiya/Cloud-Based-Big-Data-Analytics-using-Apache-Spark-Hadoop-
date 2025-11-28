@@ -1,12 +1,17 @@
-Size: >10GB
-Source: Public GitHub Dataset
-Contains:
+Dataset Name: Amazon Reviews 2023
+Size: >10 GB
+Source: GitHub (Public Dataset)
+
+Fields Included:
+
 Product ID
 Customer ID
 Review Text
-Rating
+Rating (1-5)
 Timestamp
 Verified Purchase
 Sentiment
-⚠️ Due to size, the dataset is not included in this repository.
-Upload it to Google Cloud Storage (GCS) and access it from there.
+Because of its large size, the dataset was stored and processed through:
+
+Google Cloud Storage bucket: mybucket15560
+Google Cloud Dataproc HDFS (for Hadoop & Spark jobs)
