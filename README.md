@@ -1,156 +1,101 @@
-# Cloud-Based Big Data Analytics using Apache Spark & Hadoop (Google Cloud Dataproc)
+# Cloud-Based Big Data Analytics Using Apache Spark & Hadoop on Google Cloud Dataproc
 
-This project implements end-to-end Big Data Analytics using **Google Cloud Dataproc**, **Hadoop MapReduce**, **Apache Spark**, and **Spark MLlib** on the **Amazon Reviews 2023 dataset**.  
-It is developed as part of the MSc Data Analytics coursework.
+This project implements end-to-end Big Data analytics using **Google Cloud Dataproc**, **Hadoop MapReduce**, **Apache Spark**, and **Spark MLlib** to analyze the **Amazon Reviews 2023** dataset.  
+This work is part of the *MSc Data Analytics (2025)* coursework by **Bhavikaben Bavchandbhai Radadiya**.
 
 ---
 
 ## 📌 Project Overview
 
-The objective of this project is to solve an e-commerce business problem—customer sentiment analysis and trend identification—using Big Data tools and cloud technologies.
+The goal of this project is to address a real-world e-commerce business problem:  
+**Customer sentiment analysis, product trend discovery, and behavior analysis** using large-scale datasets processed on a cloud platform.
 
-This repository contains:
+The project includes:
 
-- Google Cloud Dataproc setup documentation  
-- Hadoop MapReduce data preprocessing  
-- Apache Spark data engineering & analytics  
-- Logistic Regression ML model using Spark MLlib  
-- Performance comparison of MapReduce vs Spark  
-- Visualizations & insights  
-
----
-
-## 🚀 Technologies Used
-
-- Google Cloud Platform  
-  - Dataproc  
-  - Cloud Storage (GCS)  
-- Hadoop MapReduce  
-- Apache Spark (PySpark)  
-- Spark MLlib  
-- Python 3.x  
+- Google Cloud Dataproc cluster setup  
+- Hadoop MapReduce for preprocessing  
+- Apache Spark for data analysis  
+- Logistic Regression using Spark MLlib  
+- Performance comparison (MapReduce vs Spark)  
+- Business insights and visualizations  
 
 ---
 
-## 📁 Dataset – Amazon Reviews 2023
+## 📁 Dataset Information
 
-- Size: **>10GB**  
-- Source: Public GitHub Dataset  
-- Contains:  
-  - Product ID  
-  - Customer ID  
-  - Review Text  
-  - Rating  
-  - Timestamp  
-  - Verified Purchase  
-  - Sentiment  
+**Dataset Name:** Amazon Reviews 2023  
+**Size:** >10 GB  
+**Source:** GitHub (Public Dataset)  
 
-⚠️ Due to size, the dataset is **not included** in this repository.  
-Upload it to **Google Cloud Storage (GCS)** and access it from there.
+**Fields Included:**
+- Product ID  
+- Customer ID  
+- Review Text  
+- Rating (1-5)  
+- Timestamp  
+- Verified Purchase  
+- Sentiment  
 
----
-
-## ⚙️ Cloud Architecture
-
-<img width="1536" height="1024" alt="cloud Architecture" src="https://github.com/user-attachments/assets/04ff5408-925c-4758-8541-64d9fa93112c" />
+Because of its large size, the dataset was stored and processed through:
+- **Google Cloud Storage bucket:** `mybucket15560`  
+- **Google Cloud Dataproc HDFS (for Hadoop & Spark jobs)**  
 
 ---
 
-## 🔧 Setup & Execution
+## 🏗 Cloud Infrastructure (Google Cloud)
 
-### 1️⃣ Create and Configure Dataproc Cluster  
-- Enable APIs  
-- Create bucket  
-- Configure master and worker nodes  
-- Choose appropriate machine types
+### **Bucket Name (Used in the Project):**
+
+mybucket15560
 
 
-### 2️⃣ Upload Dataset to Cloud Storage
-
-gsutil cp dataset.json gs://your-bucket/raw/
-
-### 3️⃣ Copy Data to HDFS
-
-hdfs dfs -mkdir /data
-hdfs dfs -copyFromLocal dataset.json /data/
-
----
-
-## 🗂 Hadoop MapReduce Job
-
-Example run:
-
-hadoop jar wordcount.jar /data/dataset.json /output/wordcount 
-
-Code available in:
-
-src/mapreduce/
-
-
----
-## 🔥 Spark Analysis Job
-
-Submit PySpark job:
-
-gcloud dataproc jobs submit pyspark src/spark/spark_analysis.py --cluster=yourcluster
-
-Outputs stored in HDFS.
+### **Dataproc Cluster (Configuration Used):**
+| Component | Configuration |
+|----------|---------------|
+| Region | europe-west4 |
+| Zone | europe-west4-a |
+| Cluster Mode | Standard |
+| Master Node | n1-standard-4 |
+| Worker Nodes | n1-standard-2 |
+| Preemptible Workers | 2 |
+| Autoscaling | Enabled (min 2, max 10) |
 
 ---
 
-## 🤖 Machine Learning – Logistic Regression (Spark MLlib)
+## 🔧 Setup Instructions
 
-Used for binary sentiment classification
+### **1️⃣ Create Google Cloud Project**
+- Sign in to Google Cloud Console  
+- Create a new project  
+- Link billing  
 
-Accuracy: 87%
 
-Metrics used: Precision, Recall, F1-Score
+### **2️⃣ Enable Required APIs**
+- Dataproc API
+- Compute Engine API  
+- Cloud Storage API  
 
-Balanced on 80/20 train-test split
 
-Notebook:
+### **3️⃣ Create Cloud Storage Bucket**
+Bucket created in this project:
 
-notebooks/model_training.ipynb
 
+mybucket15560
+
+
+### **4️⃣ Upload Dataset to Storage**
+  
+gsutil cp amazon_reviews_2023.json gs://mybucket15560/
+
+
+### **5️⃣ Create the Dataproc Cluster**
+Using UI or gcloud command:
+
+```bash
+gcloud dataproc clusters create mycluster \
+    --region=europe-west4 \
+    --zone=europe-west4-a \
+    --master-machine-type=n1-standard-4 \
+    --worker-machine-type=n1-standard-2 \
+    --num-workers=2
 ---
-
-## 📊 Visualizations
-
-Place generated images in:
-
-images/
-
-Examples:
-
-Positive vs negative sentiment distribution
-
-Rating trends
-
-Verified vs non-verified purchase comparison
-
----
-
-## 📌 Key Insights
-
-Negative reviews help identify product weaknesses
-
-Sentiment data improves product recommendation systems
-
-Helps in inventory and supply chain optimization
-
-Detects unusual/fake reviews
-
-Real-time insights enhance customer satisfaction
-
----
-
-## 👩‍💻 Author
-
-Bhavikaben Radadiya
-MSc Data Analytics – 2025
-GitHub:https://github.com/bhavikaradadiya
-
-## 📜 License
-
-This project is licensed under the MIT License.
-See the LICENSE file for details.
